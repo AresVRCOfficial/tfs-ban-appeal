@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fruit Squad Discord Ban Appeal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    h2 {
+      text-align: center;
+      color: #4CAF50;
+    }
+    label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+    input, textarea, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Ban Appeal Form</h2>
+    <form id="appealForm">
+      <label for="username">Discord Username:</label>
+      <input type="text" id="username" name="username" placeholder="Your Discord Username" required>
+      
+      <label for="reason">Reason for Ban:</label>
+      <textarea id="reason" name="reason" placeholder="Describe why you were banned" required></textarea>
+      
+      <label for="apology">Apology Message:</label>
+      <textarea id="apology" name="apology" placeholder="Why should we unban you?" required></textarea>
+      
+      <label for="evidence">Any Supporting Evidence:</label>
+      <textarea id="evidence" name="evidence" placeholder="Links or explanations (optional)"></textarea>
+      
+      <button type="button" onclick="submitAppeal()">Submit Appeal</button>
+    </form>
+    <p id="responseMessage" style="color: red; text-align: center; margin-top: 15px;"></p>
+  </div>
+
+  <script>
+    async function submitAppeal() {
+      const username = document.getElementById("username").value;
+      const reason = document.getElementById("reason").value;
+      const apology = document.getElementById("apology").value;
+      const evidence = document.getElementById("evidence").value;
+
+      const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your webhook URL
+
+      const embed = {
+        username: "Ban Appeal Bot",
+        embeds: [{
+          title: "New Ban Appeal",
+          color: 65280, // Green color
+          fields: [
+            { name: "Discord Username", value: username, inline: false },
+            { name: "Reason for Ban", value: reason, inline: false },
+            { name: "Apology Message", value: apology, inline: false },
+            { name: "Supporting Evidence", value: evidence || "N/A", inline: false }
+          ],
+          footer: {
+            text: "Fruit Squad Ban Appeal",
+            icon_url: "https://your-icon-url.com/icon.png" // Optional icon URL
+          },
+          timestamp: new Date()
+        }]
+      };
+
+      const requestOptions = {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(embed)
+      };
+
+      try {
+        const response = await fetch(webhookURL, requestOptions);
+        if (response.ok) {
+          document.getElementById("responseMessage").style.color = "green";
+          document.getElementById("responseMessage").textContent = "Appeal submitted successfully!";
+          document.getElementById("appealForm").reset();
+        } else {
+          throw new Error("Failed to submit appeal.");
+        }
+      } catch (error) {
+        document.getElementById("responseMessage").style.color = "red";
+        document.getElementById("responseMessage").textContent = "There was an error submitting your appeal. Please try again later.";
+      }
+    }
+  </script>
+</body>
+</html>
