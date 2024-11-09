@@ -13,7 +13,7 @@
       font-family: 'Poppins', sans-serif;
     }
     body {
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fad0c4, #ffd1ff);
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffd1ff, #ffe4e1);
       display: flex;
       justify-content: center;
       align-items: center;
@@ -21,6 +21,7 @@
       padding: 10px;
       background-size: 200% 200%;
       animation: gradientAnimation 5s ease infinite;
+      overflow: hidden;
     }
     @keyframes gradientAnimation {
       0% { background-position: 0% 50%; }
@@ -28,6 +29,31 @@
       100% { background-position: 0% 50%; }
     }
 
+    /* Falling fruit */
+    .falling-fruit {
+      position: fixed;
+      top: -50px;
+      font-size: 30px;
+      opacity: 0.8;
+      animation: fall linear infinite;
+    }
+
+    /* Fruit-specific animations */
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .fruit1 { left: 10%; animation-duration: 5s; }
+    .fruit2 { left: 20%; animation-duration: 6s; }
+    .fruit3 { left: 30%; animation-duration: 7s; }
+    .fruit4 { left: 50%; animation-duration: 4s; }
+    .fruit5 { left: 70%; animation-duration: 8s; }
+    .fruit6 { left: 90%; animation-duration: 6.5s; }
+
+    /* Form container */
     .container {
       background: #fff;
       border-radius: 20px;
@@ -38,16 +64,7 @@
       text-align: center;
       position: relative;
       overflow: hidden;
-    }
-
-    .container::before {
-      content: "🍓🍍🍉🍌🍒";
-      font-size: 40px;
-      position: absolute;
-      top: -20px;
-      right: -20px;
-      opacity: 0.1;
-      transform: rotate(45deg);
+      z-index: 1;
     }
 
     h2 {
@@ -80,11 +97,6 @@
       transition: all 0.3s ease;
     }
 
-    input:focus, textarea:focus {
-      border-color: #ff6b6b;
-      box-shadow: 0 0 8px rgba(255, 107, 107, 0.3);
-    }
-
     textarea {
       resize: vertical;
       min-height: 80px;
@@ -99,19 +111,17 @@
       margin-top: 20px;
       transition: background 0.3s ease;
     }
-
-    button:hover {
-      background: #fa5252;
-    }
-
-    #responseMessage {
-      color: red;
-      margin-top: 10px;
-      font-size: 0.9em;
-    }
   </style>
 </head>
 <body>
+  <!-- Falling fruits -->
+  <div class="falling-fruit fruit1">🍓</div>
+  <div class="falling-fruit fruit2">🍌</div>
+  <div class="falling-fruit fruit3">🍉</div>
+  <div class="falling-fruit fruit4">🍒</div>
+  <div class="falling-fruit fruit5">🍍</div>
+  <div class="falling-fruit fruit6">🍎</div>
+
   <div class="container">
     <h2>Fruit Squad 🍉 Ban Appeal</h2>
     <p class="subtitle">Appeal to get back into the fruity fun!</p>
@@ -140,13 +150,13 @@
       const apology = document.getElementById("apology").value;
       const evidence = document.getElementById("evidence").value;
 
-      const webhookURL = "https://discord.com/api/webhooks/1304632339808391220/hM6izqBJUe0IJmAxtNAvy3rL2xPCayQuLKxJFGKYtlcBp1rz_EUOMCeNOw5ujm29Y6DI"; // Replace with your webhook URL
+      const webhookURL = "YOUR_DISCORD_WEBHOOK_URL"; // Replace with your webhook URL
 
       const embed = {
         username: "Ban Appeal Bot",
         embeds: [{
           title: "New Ban Appeal",
-          color: 0xff6b6b, // Pink color
+          color: 0xff6b6b,
           fields: [
             { name: "Discord Username", value: username, inline: false },
             { name: "Reason for Ban", value: reason, inline: false },
@@ -155,7 +165,7 @@
           ],
           footer: {
             text: "Fruit Squad Ban Appeal",
-            icon_url: "https://your-icon-url.com/icon.png" // Optional icon URL
+            icon_url: "https://your-icon-url.com/icon.png"
           },
           timestamp: new Date()
         }]
@@ -184,3 +194,4 @@
   </script>
 </body>
 </html>
+
