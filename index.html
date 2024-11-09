@@ -1,217 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fruit Squad Discord Ban Appeal</title>
-  <style>
-    /* Base styling */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-    body {
-      background: linear-gradient(135deg, #ff9a9e, #fad0c4, #ffd1ff, #ffe4e1);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      padding: 10px;
-      background-size: 200% 200%;
-      animation: gradientAnimation 5s ease infinite;
-      overflow: hidden;
-    }
-    @keyframes gradientAnimation {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
-    /* Falling fruit */
-    .falling-fruit {
-      position: fixed;
-      top: -50px;
-      font-size: 30px;
-      opacity: 0.8;
-      animation: fall linear infinite;
-    }
-
-    @keyframes fall {
-      to {
-        transform: translateY(100vh);
-        opacity: 0;
-      }
-    }
-
-    /* Fruit-specific animations */
-    .fruit1 { left: 10%; animation-duration: 5s; }
-    .fruit2 { left: 20%; animation-duration: 6s; }
-    .fruit3 { left: 30%; animation-duration: 7s; }
-    .fruit4 { left: 50%; animation-duration: 4s; }
-    .fruit5 { left: 70%; animation-duration: 8s; }
-    .fruit6 { left: 90%; animation-duration: 6.5s; }
-
-    /* Form container */
-    .container {
-      background: #fff;
-      border-radius: 20px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      max-width: 500px;
-      width: 100%;
-      padding: 20px 40px;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    h2 {
-      font-size: 2em;
-      color: #ff6b6b;
-      margin-bottom: 10px;
-    }
-
-    .subtitle {
-      color: #666;
-      font-size: 1em;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      color: #444;
-      font-weight: 600;
-      margin: 15px 0 5px;
-    }
-
-    input, textarea, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 5px;
-      border-radius: 10px;
-      border: 2px solid #ffd1ff;
-      outline: none;
-      font-size: 0.9em;
-      transition: all 0.3s ease;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    button {
-      background: #ff6b6b;
-      color: #fff;
-      font-size: 1em;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 20px;
-      transition: background 0.3s ease;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ban Appeal Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 50%;
+            margin: 0 auto;
+        }
+        h1 {
+            text-align: center;
+            color: #4CAF50;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .submit-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .submit-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-  <!-- Falling fruits -->
-  <div class="falling-fruit fruit1">🍓</div>
-  <div class="falling-fruit fruit2">🍌</div>
-  <div class="falling-fruit fruit3">🍉</div>
-  <div class="falling-fruit fruit4">🍒</div>
-  <div class="falling-fruit fruit5">🍍</div>
-  <div class="falling-fruit fruit6">🍎</div>
 
-  <!-- Form Container -->
-  <div class="container" id="appealFormContainer">
-    <h2>Fruit Squad 🍉 Ban Appeal</h2>
-    <p class="subtitle">Appeal to get back into the fruity fun!</p>
-    <form id="appealForm">
-      <label for="username">Discord Username:</label>
-      <input type="text" id="username" name="username" placeholder="e.g., FruityFan#1234" required>
-      
-      <label for="reason">Reason for Ban:</label>
-      <textarea id="reason" name="reason" placeholder="Why do you think you were banned?" required></textarea>
-      
-      <label for="apology">Apology Message:</label>
-      <textarea id="apology" name="apology" placeholder="Why should we unban you?" required></textarea>
-      
-      <label for="evidence">Supporting Evidence (optional):</label>
-      <textarea id="evidence" name="evidence" placeholder="Any proof or explanation?"></textarea>
-      
-      <button type="button" onclick="submitAppeal()">🍓 Submit Appeal 🍓</button>
-    </form>
-  </div>
+    <div class="form-container">
+        <h1>Ban Appeal</h1>
+        <form id="appeal-form">
+            <input type="text" id="username" class="input-field" placeholder="Your Discord Username" required>
+            <textarea id="reason" class="input-field" placeholder="Why should you be unbanned?" rows="4" required></textarea>
+            <button type="submit" class="submit-button">Submit Appeal</button>
+        </form>
+        <div id="success-message" style="display: none; text-align: center; color: green;">
+            <h3>Your appeal has been submitted successfully!</h3>
+        </div>
+    </div>
 
-  <!-- Success Page -->
-  <div class="container" id="successPage" style="display: none;">
-    <h2>Thank You! 🍇</h2>
-    <p>Your appeal has been submitted successfully. We will review it soon.</p>
-  </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Base64 encoded Discord webhook URL (obfuscated)
+        const encodedWebhook = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3MvMTIzNDU2Nzg5MC9hYmNkZWZn";
+        const webhookURL = atob(encodedWebhook); // Decode to get the actual webhook URL
 
-  <script>
-    // Check if appeal was already submitted
-    if (localStorage.getItem("appealSubmitted")) {
-      showSuccessPage();
-    }
+        // Handle form submission
+        $("#appeal-form").on("submit", function(event) {
+            event.preventDefault(); // Prevent default form submission
 
-    // Display success page
-    function showSuccessPage() {
-      document.getElementById("appealFormContainer").style.display = "none";
-      document.getElementById("successPage").style.display = "block";
-    }
+            const username = $("#username").val();
+            const reason = $("#reason").val();
 
-    async function submitAppeal() {
-      const username = document.getElementById("username").value;
-      const reason = document.getElementById("reason").value;
-      const apology = document.getElementById("apology").value;
-      const evidence = document.getElementById("evidence").value;
+            const appealData = {
+                username: username,
+                reason: reason
+            };
 
-      const webhookURL = "https://discord.com/api/webhooks/1304632339808391220/hM6izqBJUe0IJmAxtNAvy3rL2xPCayQuLKxJFGKYtlcBp1rz_EUOMCeNOw5ujm29Y6DI"; // Replace with your webhook URL
+            // Send data to Discord webhook via POST request
+            fetch(webhookURL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    content: `**Ban Appeal Submitted**\n**Username**: ${appealData.username}\n**Reason**: ${appealData.reason}`
+                })
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Show success message and hide form
+                    $("#appeal-form").hide();
+                    $("#success-message").show();
+                    // Store that the user has submitted an appeal
+                    localStorage.setItem("appealSubmitted", "true");
+                } else {
+                    alert("There was an error submitting your appeal. Please try again.");
+                }
+            })
+            .catch(error => {
+                alert("Error: " + error.message);
+            });
+        });
 
-      const embed = {
-        username: "Ban Appeal Bot",
-        embeds: [{
-          title: "New Ban Appeal",
-          color: 0xff6b6b,
-          fields: [
-            { name: "Discord Username", value: username, inline: false },
-            { name: "Reason for Ban", value: reason, inline: false },
-            { name: "Apology Message", value: apology, inline: false },
-            { name: "Supporting Evidence", value: evidence || "N/A", inline: false }
-          ],
-          footer: {
-            text: "Fruit Squad Ban Appeal",
-            icon_url: "https://your-icon-url.com/icon.png"
-          },
-          timestamp: new Date()
-        }]
-      };
-
-      const requestOptions = {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(embed)
-      };
-
-      try {
-        const response = await fetch(webhookURL, requestOptions);
-        if (response.ok) {
-          localStorage.setItem("appealSubmitted", "true");
-          showSuccessPage();
-        } else {
-          alert("Failed to submit appeal. Please try again later.");
+        // Check if the user has already submitted an appeal
+        if (localStorage.getItem("appealSubmitted") === "true") {
+            window.location.href = "success.html"; // Redirect to success page if appeal was already submitted
         }
-      } catch (error) {
-        alert("There was an error submitting your appeal. Please try again later.");
-      }
-    }
+    </script>
 
-    // Random fruit emoji cursor
-    const fruitEmojis = ["🍓", "🍉", "🍌", "🍎", "🍒", "🍍"];
-    const randomFruitEmoji = fruitEmojis[Math.floor(Math.random() * fruitEmojis.length)];
-    document.body.style.cursor = `url(data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' height='32' width='32'><text x='0' y='24' font-size='24'>${randomFruitEmoji}</text></svg>) 16 16, auto`;
-  </script>
 </body>
 </html>
 
