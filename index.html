@@ -8,7 +8,6 @@
         /* General Styling */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(to right, #ffb6c1, #ff7f50);
             margin: 0;
             padding: 0;
             color: #fff;
@@ -18,13 +17,11 @@
         }
 
         h1 {
-            color: #ff6347;
             font-size: 2.5em;
             margin-top: 20px;
         }
 
         .form-container {
-            background: rgba(255, 255, 255, 0.8);
             padding: 30px;
             border-radius: 15px;
             box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.3);
@@ -32,49 +29,87 @@
             margin: 30px auto;
             text-align: left;
             font-size: 1.1em;
+            transition: background 0.3s ease;
         }
 
-        .input-field {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0;
-            border: 2px solid #ff6347;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: 0.3s ease;
+        /* Light Theme Styles */
+        @media (prefers-color-scheme: light) {
+            body {
+                background: linear-gradient(to right, #ffb6c1, #ff7f50);
+                color: #333;
+            }
+
+            .form-container {
+                background: rgba(255, 255, 255, 0.9);
+                color: #333;
+                border: 2px solid #ff6347;
+            }
+
+            h1 {
+                color: #ff6347;
+            }
+
+            .input-field {
+                border: 2px solid #ff6347;
+            }
+
+            .submit-button {
+                background-color: #ff6347;
+                color: white;
+            }
+
+            .submit-button:hover {
+                background-color: #ff4500;
+            }
+
+            .submit-button:active {
+                background-color: #ff3333;
+            }
+
+            #success-message {
+                color: #28a745;
+            }
         }
 
-        .input-field:focus {
-            outline: none;
-            border-color: #ff4500;
-        }
+        /* Dark Theme Styles */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: linear-gradient(to right, #2e2e2e, #444444);
+                color: #fff;
+            }
 
-        .submit-button {
-            padding: 15px;
-            background-color: #ff6347;
-            border: none;
-            border-radius: 8px;
-            color: white;
-            font-size: 1.2em;
-            cursor: pointer;
-            width: 100%;
-            transition: 0.3s ease;
-        }
+            .form-container {
+                background: rgba(50, 50, 50, 0.9);
+                color: #fff;
+                border: 2px solid #ff6347;
+            }
 
-        .submit-button:hover {
-            background-color: #ff4500;
-        }
+            h1 {
+                color: #ff6347;
+            }
 
-        .submit-button:active {
-            background-color: #ff3333;
-        }
+            .input-field {
+                border: 2px solid #ff6347;
+                background: #333;
+                color: #fff;
+            }
 
-        /* Success Message */
-        #success-message {
-            color: #28a745;
-            font-size: 1.5em;
-            margin-top: 20px;
-            font-weight: bold;
+            .submit-button {
+                background-color: #ff6347;
+                color: white;
+            }
+
+            .submit-button:hover {
+                background-color: #ff4500;
+            }
+
+            .submit-button:active {
+                background-color: #ff3333;
+            }
+
+            #success-message {
+                color: #28a745;
+            }
         }
 
         /* Fruity Falling Emojis */
@@ -103,6 +138,50 @@
             100% {
                 top: 100%;
             }
+        }
+
+        /* Input Styling */
+        .input-field {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: 0.3s ease;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #ff4500;
+        }
+
+        /* Button Styling */
+        .submit-button {
+            padding: 15px;
+            background-color: #ff6347;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-size: 1.2em;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s ease;
+        }
+
+        .submit-button:hover {
+            background-color: #ff4500;
+        }
+
+        .submit-button:active {
+            background-color: #ff3333;
+        }
+
+        /* Success Message */
+        #success-message {
+            color: #28a745;
+            font-size: 1.5em;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -188,10 +267,11 @@
             });
         });
 
-        // Check if the user has already submitted an appeal
+        // Check if appeal has already been submitted
         if (localStorage.getItem("appealSubmitted") === "true") {
-            window.location.href = "success.html"; // Redirect to success page if appeal was already submitted
+            document.body.innerHTML = '<h1>🎉 Your appeal has already been submitted! 🍍</h1>';
         }
     </script>
+
 </body>
 </html>
