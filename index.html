@@ -243,31 +243,56 @@
                 fruit: fruit
             };
 
+            // Create the embed object for Discord webhook
+            const embed = {
+                title: "Ban Appeal Submission 🍉",
+                description: "A new ban appeal has been submitted.",
+                color: 0xFF6347, // Tomato red color
+                fields: [
+                    {
+                        name: "Discord Username 🍏",
+                        value: appealData.username,
+                        inline: true
+                    },
+                    {
+                        name: "Appeal Reason 🍇",
+                        value: appealData.reason,
+                        inline: false
+                    },
+                    {
+                        name: "Favorite Fruit 🍓",
+                        value: appealData.fruit,
+                        inline: true
+                    }
+                ],
+                footer: {
+                    text: "Fruit Squad Ban Appeals 🍍"
+                },
+                timestamp: new Date()
+            };
+
             // Send data to Discord webhook via POST request
             fetch(webhookURL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    content: `**Ban Appeal Submitted**\n**Username**: ${appealData.username}\n**Reason**: ${appealData.reason}\n**Favorite Fruit**: ${appealData.fruit}`
-                })
-            })
-            .then(response => {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ embeds: [embed] })
+            }).then(response => {
                 if (response.ok) {
-                    // Show success message and hide form
-                    $("#appeal-form").hide();
-                    $("#success-message").show();
-                    // Store that the user has submitted an appeal
+                    // Display success message
                     localStorage.setItem("appealSubmitted", "true");
+                    $("#success-message").show();
+                    $("form").hide();
                 } else {
-                    alert("There was an error submitting your appeal. Please try again.");
+                    alert("There was an issue submitting your appeal. Please try again.");
                 }
-            })
-            .catch(error => {
-                alert("Error: " + error.message);
+            }).catch(error => {
+                console.error("Error:", error);
             });
         });
 
-        // Check if appeal has already been submitted
+        // Check if appeal has been submitted
         if (localStorage.getItem("appealSubmitted") === "true") {
             document.body.innerHTML = '<h1>🎉 Your appeal has already been submitted! 🍍</h1>';
         }
@@ -275,3 +300,4 @@
 
 </body>
 </html>
+
