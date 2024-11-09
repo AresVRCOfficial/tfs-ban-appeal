@@ -38,7 +38,6 @@
       animation: fall linear infinite;
     }
 
-    /* Fruit-specific animations */
     @keyframes fall {
       to {
         transform: translateY(100vh);
@@ -46,6 +45,7 @@
       }
     }
 
+    /* Fruit-specific animations */
     .fruit1 { left: 10%; animation-duration: 5s; }
     .fruit2 { left: 20%; animation-duration: 6s; }
     .fruit3 { left: 30%; animation-duration: 7s; }
@@ -122,7 +122,8 @@
   <div class="falling-fruit fruit5">🍍</div>
   <div class="falling-fruit fruit6">🍎</div>
 
-  <div class="container">
+  <!-- Form Container -->
+  <div class="container" id="appealFormContainer">
     <h2>Fruit Squad 🍉 Ban Appeal</h2>
     <p class="subtitle">Appeal to get back into the fruity fun!</p>
     <form id="appealForm">
@@ -140,10 +141,26 @@
       
       <button type="button" onclick="submitAppeal()">🍓 Submit Appeal 🍓</button>
     </form>
-    <p id="responseMessage"></p>
+  </div>
+
+  <!-- Success Page -->
+  <div class="container" id="successPage" style="display: none;">
+    <h2>Thank You! 🍇</h2>
+    <p>Your appeal has been submitted successfully. We will review it soon.</p>
   </div>
 
   <script>
+    // Check if appeal was already submitted
+    if (localStorage.getItem("appealSubmitted")) {
+      showSuccessPage();
+    }
+
+    // Display success page
+    function showSuccessPage() {
+      document.getElementById("appealFormContainer").style.display = "none";
+      document.getElementById("successPage").style.display = "block";
+    }
+
     async function submitAppeal() {
       const username = document.getElementById("username").value;
       const reason = document.getElementById("reason").value;
@@ -180,18 +197,22 @@
       try {
         const response = await fetch(webhookURL, requestOptions);
         if (response.ok) {
-          document.getElementById("responseMessage").style.color = "green";
-          document.getElementById("responseMessage").textContent = "Appeal submitted successfully!";
-          document.getElementById("appealForm").reset();
+          localStorage.setItem("appealSubmitted", "true");
+          showSuccessPage();
         } else {
-          throw new Error("Failed to submit appeal.");
+          alert("Failed to submit appeal. Please try again later.");
         }
       } catch (error) {
-        document.getElementById("responseMessage").style.color = "red";
-        document.getElementById("responseMessage").textContent = "There was an error submitting your appeal. Please try again later.";
+        alert("There was an error submitting your appeal. Please try again later.");
       }
     }
+
+    // Random fruit emoji cursor
+    const fruitEmojis = ["🍓", "🍉", "🍌", "🍎", "🍒", "🍍"];
+    const randomFruitEmoji = fruitEmojis[Math.floor(Math.random() * fruitEmojis.length)];
+    document.body.style.cursor = `url(data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' height='32' width='32'><text x='0' y='24' font-size='24'>${randomFruitEmoji}</text></svg>) 16 16, auto`;
   </script>
 </body>
 </html>
+
 
