@@ -6,6 +6,46 @@
     <title>Fruit Squad 🍍🍇🍓</title>
     <link rel="icon" href="🍉" id="favicon">
     <style>
+/* Basic styling */
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Falling fruit container */
+.falling-fruit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Fruit animation styling */
+@keyframes fall {
+    0% {
+        transform: translateY(-100px);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Individual fruit elements */
+.fruit-emoji {
+    position: absolute;
+    top: -100px;
+    font-size: 30px;
+    opacity: 0;
+    animation: fall linear;
+    animation-iteration-count: infinite;
+    pointer-events: none;
+}
+
 /* Welcome Section Styling */
 .welcome {
     background-color: var(--light-bg);
@@ -111,6 +151,7 @@
     </style>
 </head>
 <body>
+    <div class="falling-fruit"></div>
 
 <!-- Navbar with Theme Toggle -->
 <nav>
@@ -177,8 +218,33 @@
 </footer>
 
 <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const fruits = ["🍎", "🍌", "🍉", "🍇", "🍊", "🍍", "🍒", "🍓"];
+        const fruitContainer = document.querySelector(".falling-fruit");
+
+        function createFruit() {
+            const fruit = document.createElement("div");
+            fruit.classList.add("fruit-emoji");
+            fruit.innerText = fruits[Math.floor(Math.random() * fruits.length)];
+            
+            // Random position, size, and speed
+            fruit.style.left = `${Math.random() * 100}vw`;
+            fruit.style.animationDuration = `${4 + Math.random() * 4}s`;
+            fruit.style.fontSize = `${20 + Math.random() * 20}px`;
+            fruit.style.opacity = 0.8;
+
+            fruitContainer.appendChild(fruit);
+
+            // Remove the fruit after animation to prevent overflow
+            fruit.addEventListener("animationend", () => {
+                fruit.remove();
+            });
+        }
+
+        // Create fruits at intervals
+        setInterval(createFruit, 500);
+    });
     // Random Favicon
-    const fruits = ["🍇", "🍌", "🍍", "🍎", "🍉", "🍓"];
     document.getElementById("favicon").href = fruits[Math.floor(Math.random() * fruits.length)];
 
     // Dark Mode Sync with System
