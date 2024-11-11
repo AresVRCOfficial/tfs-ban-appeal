@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Squad 🍍🍇🍓</title>
+    <link rel="icon" href="🍉" id="favicon">
+    <style>
+        /* Basic Reset */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: Arial, sans-serif; }
+        body { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px; background: linear-gradient(135deg, #fff7e6, #e6ffe6); color: #333; }
+
+        /* Navbar Styles */
+        .navbar { 
+            width: 100%; 
+            background: linear-gradient(45deg, #FF6F61, #FF8A65); 
+            padding: 10px 20px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+        .navbar .logo { 
+            font-size: 1.8em; 
+            font-weight: bold; 
+            color: white; 
+        }
+        .navbar ul {
+            list-style: none; 
+            display: flex; 
+            gap: 15px; 
+        }
+        .navbar ul li {
+            position: relative;
+        }
+        .navbar ul li a {
+            text-decoration: none; 
+            color: white; 
+            font-size: 1.1em; 
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: 0.3s ease;
+        }
+        .navbar ul li a:hover {
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        /* Header */
+        header { text-align: center; padding: 20px; }
+        h1 { font-size: 2.5em; color: #FF6F61; }
+        p { font-size: 1.2em; color: #4CAF50; margin: 10px 0; }
+        
+        /* Member of the Month Spotlight */
+        .spotlight { background-color: #FFF3CD; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); width: 80%; max-width: 500px; margin: 20px auto; text-align: center; }
+        .spotlight img { border-radius: 50%; width: 80px; height: 80px; margin-bottom: 10px; }
+        .spotlight h2 { font-size: 1.5em; color: #FF6F61; }
+        .spotlight p { font-size: 1em; color: #666; }
+
+        /* CTA Buttons */
+        .cta-buttons { display: flex; gap: 15px; margin-top: 20px; }
+        .cta-buttons a { padding: 10px 20px; background-color: #FF6F61; color: white; border-radius: 5px; text-decoration: none; transition: 0.3s; }
+        .cta-buttons a:hover { background-color: #FF8A65; }
+
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <div class="logo">Fruit Squad 🍍🍇🍓</div>
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#ban-appeals">Ban Appeals</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#member-profiles">Member Profiles</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+    </ul>
+</nav>
+
+<header>
+    <h1>Welcome to the Fruit Squad 🍍🍇🍓</h1>
+    <p>Where Fun, Friendship, and Fresh Fruit Come Together!</p>
+</header>
+
+<section class="spotlight">
+    <img src="member-avatar.jpg" alt="Member Avatar">
+    <h2>🍉 Watermelon Warrior</h2>
+    <p>Congratulations to our Member of the Month: <strong>FruitFella</strong>!</p>
+    <p>Known for their incredible contributions in events and spreading good vibes!</p>
+</section>
+
+<div class="cta-buttons">
+    <a href="#join">Join the Fun</a>
+    <a href="#get-involved">Get Involved</a>
+</div>
+
+<footer>
+    <p>© 2024 Fruit Squad | 🍇🍌🍍🍎🍉🍓</p>
+</footer>
+
+<script>
+    // Random Favicon Change
+    const fruits = ["🍇", "🍌", "🍍", "🍎", "🍉", "🍓"];
+    document.getElementById("favicon").href = fruits[Math.floor(Math.random() * fruits.length)];
+</script>
+
+</body>
+</html>
