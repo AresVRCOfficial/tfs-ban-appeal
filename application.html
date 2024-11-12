@@ -1,101 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Programs Manager Application</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 600px;
-            margin: auto;
-            padding: 1em;
-        }
-        label {
-            display: block;
-            margin-top: 1em;
-        }
-        button {
-            margin-top: 1em;
-            padding: 10px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programs Manager Application</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    form { max-width: 600px; margin: auto; }
+    label { display: block; margin-top: 15px; font-weight: bold; }
+    input[type="text"], input[type="email"], textarea, select {
+      width: 100%; padding: 8px; margin-top: 5px;
+    }
+    button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; margin-top: 20px; }
+    button:hover { background-color: #45a049; }
+  </style>
 </head>
 <body>
 
-    <h1>Programs Manager Application</h1>
-    <form id="applicationForm">
-        <label for="name">Full Name:</label>
-        <input type="text" id="name" name="name" required>
+<h2 style="text-align: center;">Programs Manager Application</h2>
+<form id="applicationForm">
+  
+  <label for="fullName">Full Name</label>
+  <input type="text" id="fullName" name="fullName" required>
 
-        <label for="age">Age (Must be 19+):</label>
-        <input type="number" id="age" name="age" required>
+  <label for="age">Age (Must be 19+)</label>
+  <input type="number" id="age" name="age" required min="19">
 
-        <label for="experience">Relevant Experience (e.g., managing programs, partnerships):</label>
-        <textarea id="experience" name="experience" required></textarea>
+  <label for="email">Email Address</label>
+  <input type="email" id="email" name="email" required>
 
-        <label for="reason">Why Do You Want This Position?</label>
-        <textarea id="reason" name="reason" required></textarea>
+  <label for="discordTag">Discord Tag (e.g., Username#1234)</label>
+  <input type="text" id="discordTag" name="discordTag" required>
 
-        <button type="submit">Submit Application</button>
-    </form>
+  <label for="experience">Relevant Experience (Please provide details)</label>
+  <textarea id="experience" name="experience" required rows="4" placeholder="Describe any relevant experience with managing programs, partnerships, or similar roles."></textarea>
 
-    <script>
-        document.getElementById("applicationForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
+  <label for="skills">Key Skills and Strengths</label>
+  <textarea id="skills" name="skills" required rows="4" placeholder="List skills that make you a strong candidate for this position."></textarea>
 
-            // Capture form data
-            const name = document.getElementById("name").value;
-            const age = document.getElementById("age").value;
-            const experience = document.getElementById("experience").value;
-            const reason = document.getElementById("reason").value;
+  <label for="availability">Availability (Hours per week you can commit)</label>
+  <input type="text" id="availability" name="availability" required>
 
-            // Discord webhook URL
-            const webhookURL = "https://discord.com/api/webhooks/1305693483239211021/_EmHkmt2fsQs06TB5e10nfIr-3mxCOBycAunM96wKw6eZVv-CetumfElqpntoK9_fbtr";
+  <label for="programs">Which programs do you have experience with or are interested in managing? (Select all that apply)</label>
+  <select id="programs" name="programs" multiple required>
+    <option value="Promotional Programs">Promotional Programs</option>
+    <option value="Partnerships">Partnerships</option>
+    <option value="Artist Verification">Artist Verification</option>
+    <option value="VRChat Creator Verification">VRChat Creator Verification</option>
+    <option value="YouTuber/Twitch Streamer Verification">YouTuber/Twitch Streamer Verification</option>
+    <option value="TikTok Creator Verification">TikTok Creator Verification</option>
+  </select>
 
-            // Construct the embed payload
-            const payload = {
-                embeds: [
-                    {
-                        title: "New Programs Manager Application",
-                        color: 3447003,  // Blue color
-                        fields: [
-                            { name: "Full Name", value: name, inline: true },
-                            { name: "Age", value: age, inline: true },
-                            { name: "Relevant Experience", value: experience },
-                            { name: "Reason for Applying", value: reason }
-                        ],
-                        timestamp: new Date().toISOString()
-                    }
-                ]
-            };
+  <label for="vision">Vision for the Role (What would you bring to this position?)</label>
+  <textarea id="vision" name="vision" required rows="4" placeholder="Share your vision and goals for this role."></textarea>
 
-            // Send the data to the Discord webhook
-            try {
-                const response = await fetch(webhookURL, {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify(payload)
-                });
+  <label for="questions">Do you have any questions or concerns?</label>
+  <textarea id="questions" name="questions" rows="3"></textarea>
 
-                if (response.ok) {
-                    alert("Application submitted successfully!");
-                    document.getElementById("applicationForm").reset();  // Clear the form
-                } else {
-                    alert("Failed to submit the application. Please try again later.");
-                }
-            } catch (error) {
-                console.error("Error submitting application:", error);
-                alert("An error occurred. Please try again.");
-            }
-        });
-    </script>
+  <button type="button" onclick="submitApplication()">Submit Application</button>
+</form>
+
+<script>
+  async function submitApplication() {
+    const webhookUrl = "https://discord.com/api/webhooks/1305693483239211021/_EmHkmt2fsQs06TB5e10nfIr-3mxCOBycAunM96wKw6eZVv-CetumfElqpntoK9_fbtr";
+
+    const form = document.getElementById("applicationForm");
+    const formData = new FormData(form);
+
+    const data = {
+      username: "Application Bot",
+      embeds: [{
+        title: "New Programs Manager Application",
+        color: 3066993,
+        fields: [
+          { name: "Full Name", value: formData.get("fullName"), inline: true },
+          { name: "Age", value: formData.get("age"), inline: true },
+          { name: "Email", value: formData.get("email") },
+          { name: "Discord Tag", value: formData.get("discordTag"), inline: true },
+          { name: "Relevant Experience", value: formData.get("experience") },
+          { name: "Key Skills and Strengths", value: formData.get("skills") },
+          { name: "Availability", value: formData.get("availability"), inline: true },
+          { name: "Programs of Interest", value: Array.from(formData.getAll("programs")).join(", ") },
+          { name: "Vision for the Role", value: formData.get("vision") },
+          { name: "Questions/Concerns", value: formData.get("questions") || "None" }
+        ],
+        timestamp: new Date().toISOString()
+      }]
+    };
+
+    try {
+      const response = await fetch(webhookUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      });
+
+      if (response.ok) {
+        alert("Your application has been submitted successfully!");
+        form.reset();
+      } else {
+        alert("There was an issue submitting your application. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred. Please check your internet connection and try again.");
+    }
+  }
+</script>
+
+</body>
+</html>
+
 
 </body>
 </html>
