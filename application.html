@@ -3,138 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fruit Squad Programs Manager Application</title>
+    <title>Programs Manager Application</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
-            margin: 0;
-            padding: 0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        h1 {
-            color: #ff6600;
-            text-align: center;
-        }
-        h2 {
-            color: #ff8800;
-            margin-top: 20px;
-        }
-        p {
-            line-height: 1.6;
+            max-width: 600px;
+            margin: auto;
+            padding: 1em;
         }
         label {
-            font-weight: bold;
             display: block;
-            margin-top: 15px;
+            margin-top: 1em;
         }
-        input[type="text"],
-        input[type="number"],
-        textarea {
-            width: 100%;
+        button {
+            margin-top: 1em;
             padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            resize: vertical;
-        }
-        textarea {
-            height: 100px;
-        }
-        .submit-btn {
-            display: block;
-            width: 100%;
-            padding: 12px;
-            background-color: #ff6600;
-            color: #fff;
+            background-color: #4CAF50;
+            color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-top: 20px;
             cursor: pointer;
-            text-align: center;
-        }
-        .submit-btn:hover {
-            background-color: #ff8800;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <h1>Fruit Squad Programs Manager Application</h1>
-    <p>Thank you for your interest in the Programs Manager position for the Fruit Squad! This role is crucial in managing and growing our promotional programs, partnerships, and creator verification processes. Please note that applicants for this position must be at least 19 years of age.</p>
-    
-    <form>
-        <h2>Basic Information</h2>
+    <h1>Programs Manager Application</h1>
+    <form id="applicationForm">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" required>
 
-        <label for="discord-username">Discord Username (including #):</label>
-        <input type="text" id="discord-username" name="discord-username">
+        <label for="age">Age (Must be 19+):</label>
+        <input type="number" id="age" name="age" required>
 
-        <label for="real-name">Real First Name:</label>
-        <input type="text" id="real-name" name="real-name">
+        <label for="experience">Relevant Experience (e.g., managing programs, partnerships):</label>
+        <textarea id="experience" name="experience" required></textarea>
 
-        <label for="age">Age (must be 19+):</label>
-        <input type="number" id="age" name="age" min="19">
+        <label for="reason">Why Do You Want This Position?</label>
+        <textarea id="reason" name="reason" required></textarea>
 
-        <label for="time-zone">Time Zone:</label>
-        <input type="text" id="time-zone" name="time-zone">
-
-        <label for="location">Location (Country):</label>
-        <input type="text" id="location" name="location">
-
-        <h2>Experience & Availability</h2>
-
-        <label for="experience">Describe your experience managing projects or programs:</label>
-        <textarea id="experience" name="experience"></textarea>
-
-        <label for="availability">What is your availability like?</label>
-        <textarea id="availability" name="availability"></textarea>
-
-        <label for="previous-work">Have you previously worked with other communities or organizations?</label>
-        <textarea id="previous-work" name="previous-work"></textarea>
-
-        <h2>Skills & Knowledge</h2>
-
-        <label for="skills">Do you have experience in program management, partnerships, or content creation?</label>
-        <textarea id="skills" name="skills"></textarea>
-
-        <label for="community-engagement">Describe any experience with community engagement and growth:</label>
-        <textarea id="community-engagement" name="community-engagement"></textarea>
-
-        <label for="verification-process">Are you familiar with verification processes for creators?</label>
-        <textarea id="verification-process" name="verification-process"></textarea>
-
-        <h2>Scenarios</h2>
-
-        <label for="youtuber-application">You receive an application from a YouTuber with a small following. How would you approach it?</label>
-        <textarea id="youtuber-application" name="youtuber-application"></textarea>
-
-        <label for="potential-partner">A potential partner’s values don’t align with Fruit Squad's guidelines. What do you do?</label>
-        <textarea id="potential-partner" name="potential-partner"></textarea>
-
-        <label for="artist-program">An artist is unsure if they meet verification criteria. How would you help them?</label>
-        <textarea id="artist-program" name="artist-program"></textarea>
-
-        <h2>Additional Information</h2>
-
-        <label for="motivation">Why are you interested in this position?</label>
-        <textarea id="motivation" name="motivation"></textarea>
-
-        <label for="additional-skills">Do you have any additional skills or qualifications?</label>
-        <textarea id="additional-skills" name="additional-skills"></textarea>
-
-        <label for="additional-info">Is there anything else you’d like us to know?</label>
-        <textarea id="additional-info" name="additional-info"></textarea>
-
-        <button type="submit" class="submit-btn">Submit Application</button>
+        <button type="submit">Submit Application</button>
     </form>
-</div>
+
+    <script>
+        document.getElementById("applicationForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            // Capture form data
+            const name = document.getElementById("name").value;
+            const age = document.getElementById("age").value;
+            const experience = document.getElementById("experience").value;
+            const reason = document.getElementById("reason").value;
+
+            // Discord webhook URL
+            const webhookURL = "https://discord.com/api/webhooks/1305693483239211021/_EmHkmt2fsQs06TB5e10nfIr-3mxCOBycAunM96wKw6eZVv-CetumfElqpntoK9_fbtr";
+
+            // Construct the embed payload
+            const payload = {
+                embeds: [
+                    {
+                        title: "New Programs Manager Application",
+                        color: 3447003,  // Blue color
+                        fields: [
+                            { name: "Full Name", value: name, inline: true },
+                            { name: "Age", value: age, inline: true },
+                            { name: "Relevant Experience", value: experience },
+                            { name: "Reason for Applying", value: reason }
+                        ],
+                        timestamp: new Date().toISOString()
+                    }
+                ]
+            };
+
+            // Send the data to the Discord webhook
+            try {
+                const response = await fetch(webhookURL, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                if (response.ok) {
+                    alert("Application submitted successfully!");
+                    document.getElementById("applicationForm").reset();  // Clear the form
+                } else {
+                    alert("Failed to submit the application. Please try again later.");
+                }
+            } catch (error) {
+                console.error("Error submitting application:", error);
+                alert("An error occurred. Please try again.");
+            }
+        });
+    </script>
 
 </body>
 </html>
+
